@@ -37,11 +37,11 @@ printf  "${yellow}Excluding Packages in /etc/yum.conf and /etc/dnf/dnf.conf from
 printf "\n"
 printf  "Removing existing exclude= lines and adding new one in dnf.conf...\n\n"
 sudo sed -i '/^exclude=/d' /etc/dnf/dnf.conf
-printf 'exclude=php* wildfly* rabbitmq* couchbase* mongodb* grafana* google-chrome* docker* wkhtml* erlang* IP2Location* kube* ansible* InfluxDB* helm*' | sudo tee -a /etc/dnf/dnf.conf
+printf 'exclude=php* wildfly* rabbitmq* couchbase* mongodb* grafana* google-chrome* docker* wkhtml* erlang* IP2Location* kube* ansible* InfluxDB* helm* tesseract*' | sudo tee -a /etc/dnf/dnf.conf
 printf "\n"
 printf "Removing existing exclude= lines and adding new one in yum.conf...\n\n"
 sudo sed -i '/^exclude=/d' /etc/yum.conf
-printf 'exclude=php* wildfly* rabbitmq* couchbase* mongodb* grafana* google-chrome* docker* wkhtml* erlang* IP2Location* kube* ansible* InfluxDB* helm*' | sudo tee -a /etc/yum.conf
+printf 'exclude=php* wildfly* rabbitmq* couchbase* mongodb* grafana* google-chrome* docker* wkhtml* erlang* IP2Location* kube* ansible* InfluxDB* helm* tesseract*' | sudo tee -a /etc/yum.conf
 printf "${reset}\n\n"
 
 
