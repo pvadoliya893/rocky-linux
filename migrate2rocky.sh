@@ -1148,9 +1148,14 @@ EOF
     infomsg $'Disabling excluded modules\n\n'
     safednf -y module disable "${module_excludes[@]}" ||
             exit_message "Can't disable modules ${module_excludes[*]}"
-
+    # Build exclude args for dnf
+    declare -a dnf_exclude_args=()
+    for pkg in $PKG_EXCLUDES; do
+        dnf_exclude_args+=(--exclude="$pkg")
+    done
+    
     infomsg $'\nSyncing packages\n\n'
-    dnf -y distro-sync || exit_message "Error during distro-sync."
+    dnf -y distro-sync "${dnf_exclude_args[@]}" || exit_message "Error during distro-sync."
 
     # Disable Stream repos.
     if (( ${#installed_sys_stream_repos_pkgs[@]} ||
@@ -1324,6 +1329,14 @@ while getopts "hrVR" option; do
       usage
       ;;
   esac
+done
+# Parse KEY=VALUE arguments
+for arg in "$@"; do
+    case "$arg" in
+        PKG_EXCLUDES=*)
+            PKG_EXCLUDES="${arg#*=}"
+            ;;
+    esac
 done
 if (( ! noopts )); then
     usage
