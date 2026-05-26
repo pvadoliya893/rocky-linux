@@ -23,7 +23,7 @@ fi
 # --------------------------------------------
 echo "[2] Applying sysctl kernel tuning..."
 
-SYSCTL_FILE="/etc/sysctl.d/99-sysctl.conf.conf"
+SYSCTL_FILE="/etc/sysctl.conf"
 
 # Build config content
 read -r -d '' SYSCTL_CONFIG << 'EOF' || true
